@@ -1,6 +1,6 @@
 # README
 
-##What it is?
+## What it is?
 
 it's my first project on wails(react-ts)
 
