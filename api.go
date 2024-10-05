@@ -25,12 +25,12 @@ func makeRequest(requestType, url, token string, payload []byte) ([]byte, error)
 		request.Header.Set("Authorization", fmt.Sprintf("Bearer %s", token))
 	}
 
-	responce, err := client.Do(request)
+	response, err := client.Do(request)
 	if err != nil {
 		return nil, fmt.Errorf("request failed: %w, ", err)
 	}
 
-	body, _ := io.ReadAll(responce.Body)
+	body, _ := io.ReadAll(response.Body)
 	return body, nil
 
 }

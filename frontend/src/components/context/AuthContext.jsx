@@ -1,6 +1,6 @@
 import {Button, Result} from "antd";
 import React, {createContext, useContext, useEffect, useState} from "react";
-import AuthModal from "./Authmodal";
+import AuthModal from "./AuthModal.jsx";
 import {useNavigate} from "react-router-dom";
 
 const AuthContext = createContext({});
