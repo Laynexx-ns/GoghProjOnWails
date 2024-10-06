@@ -25,11 +25,11 @@ const RepositoryDetails = ({repository, token = ""}) =>{
             setIsLoading(true);
             const stargazers = await GetMoreInformationFromURL(repository.stargazers_url, token);
             const commits = await GetMoreInformationFromURL(repository.commits_url.replace(/{\/[a-z]*}/, ""), token);
-            const contriburtors = await GetMoreInformationFromURL(repository.contibutors_url, token);
+            const contributors = await GetMoreInformationFromURL(repository.contibutors_url, token);
 
             setCommits(commits);
             setStargazers(stargazers);
-            setContributors(contriburtors);
+            setContributors(contributors);
             setIsLoading(false)
         };
     }, [repository]);
@@ -44,6 +44,30 @@ const RepositoryDetails = ({repository, token = ""}) =>{
         }}
     >
         {repository.description}
+        <Divider/>
+        <Spin tip="Loading" spinning={isLoading}>
+            <Typography.Title level={5} style={{margin: 10}}>
+                Contributors
+            </Typography.Title>
+            <UserGrid users={contributors}/>
+            <Divider/>
+            <Typography.Title level={5} style={{margin: 10}}>
+                Stargazers
+            </Typography.Title>
+            <UserGrid users={stargazers}/>
+            <Divider/>
+            <Typography.Title level={5} style={{margin: 10}}>
+                Commits
+            </Typography.Title>
+            <Timeline mode={"alternate"}>
+                {
+                    commits.map((commit, index) => (
+                        <Timeline.Item key={index}>{commit.commit?.message}</Timeline.Item>)
+                    )
+                }
+            </Timeline>
+        </Spin>
+    </Card>);
+};
 
-    </Card>)
-}
+export default RepositoryDetails;

@@ -18,7 +18,7 @@ type Gist struct {
 	Files       interface{} `json:"files"`
 }
 
-const BaseUrl = "htpps://api.github.com"
+const BaseUrl = "https://api.github.com"
 
 var gitHubResponse APIResponse
 
@@ -87,14 +87,8 @@ func (a *App) GetMoreInformationFromURL(url, token string) (APIResponse, error) 
 
 }
 
-/*
-	используется для получения содержимого Gist. Эта функция принимает URL для необработанного содержимого GIST и токен аутентификации (пустая строка для публичных Gist)
-
-она возвращает строку, соответствует содежимому Gist
-*/
 func (a *App) GetGistContent(url, token string) (APIResponse, error) {
 	response, err := MakeGetRequest(url, token)
-	//обработка ошибок
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +100,6 @@ func (a *App) GetGistContent(url, token string) (APIResponse, error) {
 
 }
 
-// CreateNewGist  используется для создания нового Gist для аутентифицированного пользователя. Эта функция принимает два параметра Gist, который нужно создать, а так же токен
 func (a *App) CreateNewGist(gist Gist, token string) (interface{}, error) {
 	var githubResponse interface{}
 
